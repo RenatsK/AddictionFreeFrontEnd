@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './MainPage.css';
 
 const MainPage = () => {
@@ -8,10 +9,15 @@ const MainPage = () => {
     // Add any other user details you need
   };
 
+  const navigate = useNavigate();
+  const handleLogout = () => {
+        navigate('/');
+  };
+  
   return (
     <div className="main-page">
       <nav className="nav-bar">
-        <a href="/">HOME</a>
+        <a href="/main">HOME</a>
         <a href="/threads">THREADS</a>
         <a href="/chat">CHAT</a>
         <button className="logout-button" onClick={() => handleLogout()}>Log Out</button>
@@ -27,8 +33,7 @@ const MainPage = () => {
 
 // Example logout function (replace with actual logout logic)
 const handleLogout = () => {
-  // Perform logout actions (clear session, redirect, etc.)
-  console.log('Logging out...');
+
 };
 
 export default MainPage;
