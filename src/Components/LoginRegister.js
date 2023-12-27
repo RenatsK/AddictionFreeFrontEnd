@@ -1,17 +1,55 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './LoginRegister.css';
 
-function LoginForm({ onLogin }) {
-  const [username, setUsername] = useState('');
+  const LoginForm = ({ onLogin }) => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    //console.log('Login with:', { username, password });
-    onLogin();
+
+    try {
+      const response = await axios.post('http://88.200.63.148:28111/login', {
+        email,
+        password,
+      });
+
+      console.log(response.data);
+
+      if (response.data.success) {
+        onLogin(); // Trigger the login action (redirect to MainPage or set user state)
+      } else {
+        setError('Invalid email or password');
+        toast.error('Invalid email or password', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      setError('Error during login. Please try again.');
+      toast.error('Error during login. Please try again.', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
+    }
   };
+
+    onLogin();
 
   return (
     <div>
@@ -19,11 +57,11 @@ function LoginForm({ onLogin }) {
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <label>
-          Username:
+          Email:
           <input
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
@@ -43,8 +81,7 @@ function LoginForm({ onLogin }) {
     </div>
   </div>  
   );
-}
-
+};
 const RegisterForm = () => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
@@ -62,7 +99,7 @@ const RegisterForm = () => {
         password,
       });
 
-      console.log(response.data); // Should log the response from the server
+      console.log(response.data);
     } catch (error) {
       console.error('Error during registration:', error);
     }
@@ -107,6 +144,7 @@ function LoginRegister() {
 
   return (
     <div className="LoginRegister">
+      <ToastContainer />
       <header className="LoginRegister-header">
         <LoginPage onLogin={handleLogin} />
       </header>
