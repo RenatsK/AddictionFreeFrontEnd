@@ -1,0 +1,47 @@
+/* QuitForm.css */
+
+.quit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align to the left */
+    justify-content: center;
+    height: 35vh; /* 1/3 of the viewport height */
+    width: 20vw; /* 1/3 of the viewport width */
+    background-color: #F5F5F5; /* Adjust the background color as needed */
+    border: 2px solid #607274; /* Adjust the border color as needed */
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 20px; /* Adjust the margin as needed */
+  }
+  
+  /* Style for input box */
+  .quit-form input {
+    resize: none; /* Make input box non-resizable */
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #607274; /* Border color for the input box */
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  
+  /* Style for drop-down menu */
+  .quit-form select {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #607274; /* Border color for the drop-down menu */
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  
+  .quit-form button {
+    padding: 8px 12px; /* Adjust padding to change button size */
+    font-size: 14px; /* Adjust font size to change button text size */
+    background-color: #607274; /* Button background color */
+    border: none;
+    border-radius: 3px;
+  }
+
+  .quit-form button:hover {
+    transform: scale(1.07);
+  }

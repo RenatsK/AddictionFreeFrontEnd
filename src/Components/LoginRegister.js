@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://88.200.63.148:28111/login', {
+      const response = await axios.post('http://88.200.63.148:8111/login', {
         email,
         password,
       });
@@ -83,7 +83,7 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://88.200.63.148:28111/register', {
+      const response = await axios.post('http://88.200.63.148:8111/register', {
         name,
         surname,
         email,
