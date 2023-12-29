@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './LoginRegister.css';
 import { useNavigate } from 'react-router-dom';
   
-  const LoginForm = ({ onLogin }) => {
+const LoginForm = ({ onLogin }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [ emailGlobal, setEmailGlobal ] = useState('');
   
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -38,6 +39,12 @@ import { useNavigate } from 'react-router-dom';
   };
 
     onLogin();
+
+    useEffect(()=>{
+      setEmailGlobal(email)
+      localStorage.setItem('userEmail', email);
+      console.log(emailGlobal)
+    }, [email])
 
     return (
       <div>
