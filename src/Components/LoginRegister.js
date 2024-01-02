@@ -14,7 +14,7 @@ const LoginForm = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://88.200.63.148:8111/login', {
+      const response = await axios.post('http://88.200.63.148:28111/login', {
         email,
         password,
       });
@@ -43,7 +43,6 @@ const LoginForm = ({ onLogin }) => {
     useEffect(()=>{
       setEmailGlobal(email)
       localStorage.setItem('userEmail', email);
-      console.log(emailGlobal)
     }, [email])
 
     return (
@@ -90,14 +89,13 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://88.200.63.148:8111/register', {
+      const response = await axios.post('http://88.200.63.148:28111/register', {
         name,
         surname,
         email,
         password,
       });
 
-      console.log(response.data);
     } catch (error) {
       console.error('Error during registration:', error);
     }

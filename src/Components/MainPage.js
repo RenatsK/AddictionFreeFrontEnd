@@ -17,14 +17,13 @@ const MainPage = ({ user }) => {
 
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('http://88.200.63.148:8111/user/userByEmail', {
+        const response = await axios.get('http://88.200.63.148:28111/user/userByEmail', {
           params: {
             email: email, 
           },
         });
 
         setUserData(response.data.data[0].Name);
-        console.log(response.data.data[0].Name)
       } catch (err) {
         console.error('Error fetching user data:', err);
       }
@@ -42,7 +41,7 @@ const MainPage = ({ user }) => {
         <button className="logout-button" onClick={() => handleLogout()}>Log Out</button>
       </nav>
       <div className="content">
-      <h1>Welcome, {userData && userData}!</h1>
+      <h1>Welcome, {userData}!</h1>
         <QuitForm quitEmail={email}/>
       </div>
     </div>
