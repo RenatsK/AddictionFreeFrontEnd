@@ -14,7 +14,7 @@ const LoginForm = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://88.200.63.148:28111/login', {
+      const response = await axios.post('http://88.200.63.148:8111/login', {
         email,
         password,
       });
@@ -72,7 +72,7 @@ const LoginForm = ({ onLogin }) => {
               />
             </label>
             <br />
-            <button type="submit">Login</button>
+            <button className="btnRegLog" type="submit">Login</button>
           </form>
         </div>
       </div>
@@ -89,7 +89,7 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://88.200.63.148:28111/register', {
+      const response = await axios.post('http://88.200.63.148:8111/register', {
         name,
         surname,
         email,
@@ -109,7 +109,7 @@ const RegisterForm = () => {
       <label>Surname: <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} /></label>
       <label>Email: <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /></label>
       <label>Password: <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /></label>
-      <button type="submit">Register</button>
+      <button className="btnRegLog" type="submit">Register</button>
     </form>      
     </div>
   );
@@ -122,13 +122,13 @@ function LoginPage({ onLogin }) {
       {showlogin === true &&
       <>
       <LoginForm onLogin={onLogin} />
-      <button onClick={()=>setShowlogin(false)}>No account? Register!</button>
+      <button className="btnRegLog" onClick={()=>setShowlogin(false)}>No account? Register!</button>
       </>}
 
       {showlogin === false &&
       <>
       <RegisterForm />
-      <button onClick={()=>setShowlogin(true)}>Alredy registered? Login!</button>
+      <button className="btnRegLog" onClick={()=>setShowlogin(true)}>Alredy registered? Login!</button>
       </>}
     </div>
   );

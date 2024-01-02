@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './MainPage.css';
 import QuitForm from './QuitForm';
+import Stopwatch from './Stopwatch';
 import axios from 'axios';
 
 const MainPage = ({ user }) => {
@@ -17,9 +18,9 @@ const MainPage = ({ user }) => {
 
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('http://88.200.63.148:28111/user/userByEmail', {
+        const response = await axios.get('http://88.200.63.148:8111/user/userByEmail', {
           params: {
-            email: email, 
+            email: email,     
           },
         });
 
@@ -30,7 +31,7 @@ const MainPage = ({ user }) => {
     };
 
     fetchUserData();
-  }, []);
+  },);
   
   return (
     <div className="main-page">
@@ -41,8 +42,12 @@ const MainPage = ({ user }) => {
         <button className="logout-button" onClick={() => handleLogout()}>Log Out</button>
       </nav>
       <div className="content">
-      <h1>Welcome, {userData}!</h1>
+      <h1 className='welcome'>Welcome, {userData}!</h1>
+      <div className='box'>
         <QuitForm quitEmail={email}/>
+        <Stopwatch timerEmail={email}/>
+      </div>
+        
       </div>
     </div>
   );
