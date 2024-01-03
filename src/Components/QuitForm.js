@@ -88,7 +88,7 @@ const QuitForm = ({ quitEmail }) => {
             maxLength="250"
           />
         </label>
-        <button>Submit</button>
+        <button>Quit addiction</button>
         {error && <p className="error">{error}</p>}
       </form>
     </div>

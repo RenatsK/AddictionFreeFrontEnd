@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import LoginRegister from './Components/LoginRegister.js';
 import MainPage from './Components/MainPage.js';
+import Threads from './Components/Threads.js';
 import axios from 'axios';
 
 function App() {
@@ -10,7 +11,6 @@ function App() {
 
   const handleLogin = async (userData) => {
     try {
-      console.log(userData)
       const response = await axios.post('http://88.200.63.148:8111/login', {
         email: userData.email,
       });
@@ -37,6 +37,10 @@ function App() {
             <Route
               path="/main"
               element={<MainPage user={user} />}
+            />
+            <Route 
+              path="/threads"
+              element={<Threads user={user} />}
             />
           </Routes>
       </header>
