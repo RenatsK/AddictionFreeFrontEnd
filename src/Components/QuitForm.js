@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './QuitForm.css';
 import axios from 'axios';
 
-const QuitForm = ({ quitEmail }) => {
+const QuitForm = ({ quitEmail, setUpdate}) => {
   const [selectedAddiction, setSelectedAddiction] = useState('');
   const [quitReason, setQuitReason] = useState('');
   const [error, setError] = useState('');
@@ -47,6 +47,7 @@ const QuitForm = ({ quitEmail }) => {
 
       if (response.data.success) {
         console.log(response.data);
+        
       } else {
         const errorMessage = response.data.message || 'Invalid reason or addiction';
         setError(errorMessage);
@@ -54,6 +55,8 @@ const QuitForm = ({ quitEmail }) => {
     } catch (error) {
       console.error('Error submitting form: ', error);
     }
+
+    window.location.reload();
   };
 
   const handleReasonChange = (e) => {

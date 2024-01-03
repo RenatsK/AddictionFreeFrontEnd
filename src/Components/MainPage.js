@@ -9,6 +9,9 @@ const MainPage = ({ user }) => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [quitReason, setQuitReason] = useState(null);
+  const [addictionType, setAddictionType] = useState(null);
+
+
   const [email] = useState(localStorage.getItem('userEmail'))
 
   const handleLogout = () => {
@@ -25,6 +28,9 @@ const MainPage = ({ user }) => {
         });
         setUserData(response.data.data[0].Name);
         setQuitReason(response.data.data[0].Reason);
+        console.log(response.data)
+        setAddictionType(response.data.data[0].type)
+
       } catch (err) {
         console.error('Error fetching user data:', err);
       }
@@ -44,9 +50,9 @@ const MainPage = ({ user }) => {
       </nav>
       <div className="content">
       <h1 className='welcome'>Welcome, {userData}!</h1>
-      <p className='reason'>Remember why you quitted: {quitReason}</p>
+      <p className='reason'>Remember why you quit {addictionType}: {quitReason}</p>
       <div className='box'>
-        <QuitForm quitEmail={email}/>
+        <QuitForm quitEmail={email} />
         <Stopwatch timerEmail={email}/>
       </div>    
       </div>

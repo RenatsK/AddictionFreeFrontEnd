@@ -5,8 +5,8 @@
     box-sizing: border-box;
   }
   
-  .nav-bar {
-    background-color: #B2A59B;
+  .threads-nav-bar {
+    background-color: #607274;
     padding: 10px;
     display: flex;
     padding-top: 10px;
@@ -16,7 +16,7 @@
     border-radius: 3px;
   }
   
-  .nav-bar a {
+  .threads-nav-bar a {
     text-decoration: none;
     color: #fff;
     font-weight: bold;
@@ -25,19 +25,14 @@
     margin-bottom: 25px;
   }
 
-  .nav-bar a:hover {
+  .threads-nav-bar a:hover {
     color: #FAEED1;
   }
 
-  .nav-bar a:hover, 
-  .nav-bar .logout-button:hover {
+  .threads-nav-bar a:hover, 
+  .threads-nav-bar .logout-button:hover {
   transform: scale(1.09);
 }
-  
-  .threads-content {
-    flex: 1;
-    margin-left: 20px;
-  }
   
   .logout-button {
     margin-top: auto;
@@ -45,6 +40,11 @@
     padding: 12px;
     border: none;
     border-radius: 3px;
+  }
+
+  .threads-content {
+    flex: 1;
+    margin-left: 20px;
   }
   
   .logout-button:hover {
@@ -60,4 +60,21 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+  }
+
+  .threads-content {
+    flex: 1;
+    margin-left: 10px;
+  }
+  
+  .thread-item {
+    border: 3px solid #607274;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .threadsh1 {
+    font-size: 48px;
+    text-align: center;
   }
