@@ -44,4 +44,5 @@
 
   .quit-form button:hover {
     transform: scale(1.07);
+    cursor: pointer;
   }

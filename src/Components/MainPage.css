@@ -32,6 +32,7 @@
   .nav-bar a:hover, 
   .nav-bar .logout-button:hover {
   transform: scale(1.09);
+  cursor: pointer;
 }
   
   .content {

@@ -28,7 +28,6 @@ const MainPage = ({ user }) => {
         });
         setUserData(response.data.data[0].Name);
         setQuitReason(response.data.data[0].Reason);
-        console.log(response.data)
         setAddictionType(response.data.data[0].type)
 
       } catch (err) {
