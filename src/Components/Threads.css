@@ -97,16 +97,18 @@
     justify-content: center;
     z-index: 1000;
   }
-  
+
   .popup-content {
     background: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1001; /* Ensure it's above the overlay */
-    width: 90%; /* Adjust the width as needed */
+    z-index: 1001;
+    width: 90%;
     height: auto;
-    position: relative; /* Added positioning */
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
   }
   
   .popup-content h2 {
@@ -118,13 +120,65 @@
     font-size: 12px;
     background-color: #607274;
     border: none;
-    position: absolute; /* Position absolute */
-    top: 5px; /* Adjust top position as needed */
-    right: 5px; /* Adjust right position as needed */
+    position: absolute;
+    top: 5px;
+    right: 5px;
     border-radius: 3px;
   }
   
   .close-button:hover {
     cursor: pointer;
     transform: scale(1.08);
+  }
+
+  .comments-container {
+    margin-top: 10px;
+  }
+  
+  .comment-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+  }
+  
+  .user-info {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .comment-text {
+    margin-bottom: 5px;
+  }
+
+  .comment-p {
+    margin: 0px 0px;
+  }
+
+  .new-comment-container {
+    margin-top: 15px;
+  }
+  
+  .new-comment-container input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .new-comment-container button {
+    background-color: #607274;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .new-comment-container button:hover {
+    transform: scale(1.08);
+    cursor: pointer;
   }

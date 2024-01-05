@@ -1,22 +1,80 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { parsePath, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Threads.css';
 
-const ThreadPopup = ({ selectedThread, commentsData, onClose }) => {
+const ThreadPopup = ({ selectedThread, onClose }) => {
+  const [newCommentText, setNewCommentText] = useState('');
+  const [commentsData, setCommentsData] = useState();
+  const userEmail = localStorage.getItem('userEmail');
+  
+  useEffect(() => {
+    GetCommentsData()
+  }, [selectedThread, userEmail]);
+
+  const GetCommentsData = async () => {
+    try {
+      const responseComments = await axios.get(`http://88.200.63.148:8111/comments/byThread/${selectedThread.ThreadID}`);
+
+      if (responseComments.data.success) {
+        setCommentsData(responseComments.data.data);
+      } else {
+        console.error('Failed to fetch threads:', responseComments.data.error);
+      }
+    } catch (error) {
+      console.error('Error fetching threads:', error);
+    }
+  };
+
+  const handleCommentSubmit = async () => {
+    try {
+      const response = await axios.post('http://88.200.63.148:8111/comments/addComment', {
+        Email: userEmail,
+        ThreadID: selectedThread.ThreadID,
+        Text: newCommentText
+      });
+      if (response.data.success) {
+        GetCommentsData();
+        setNewCommentText('');
+      } else {
+        console.error('Failed to add comment:', response.data.error);
+      }
+    } catch (error) {
+      console.error('Error adding comment:', error);
+    }
+  };
+
   return (
     <div className="popup-overlay">
       <div className="popup-content">
         <button className="close-button" onClick={onClose}>X</button>
         <h2>{selectedThread.Topic}</h2>
         <p>
-          <strong>Topic Text:</strong> {selectedThread.TopicText}
+          {selectedThread.TopicText}
         </p>
-        <div>
+        <div className="comments-container">
+          {commentsData &&
+          <>
           <h3>Comments:</h3>
+          <div className="new-comment-container">
+          <input
+            placeholder="Add a new comment..."
+            value={newCommentText}
+            onChange={(e) => setNewCommentText(e.target.value)}
+          />
+          <button onClick={handleCommentSubmit}>Post Comment</button>
+        </div>
           {commentsData.map((comment) => (
-            <p key={comment.CommentID}>{comment.CommentText}</p>
-          ))}
+            <div key={comment.CommentID} className="comment-item">
+              <div className="user-info">
+                <strong>{comment.Name} {comment.Surname}</strong>
+              </div>
+              <div className="comment-text">
+                <p className="comment-p">{comment.Text}</p>
+              </div>
+            </div>
+            ))}
+          </>}
         </div>
       </div>
     </div>
@@ -26,7 +84,6 @@ const ThreadPopup = ({ selectedThread, commentsData, onClose }) => {
 const Threads = () => {
   const navigate = useNavigate();
   const [threadsData, setThreadsData] = useState([]);
-  const [commentsData, setCommentsData] = useState();
   const [selectedThread, setSelectedThread] = useState(null);
 
   const handleLogout = () => {
@@ -37,7 +94,6 @@ const Threads = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://88.200.63.148:8111/threads/allThreads');
-
         if (response.data.success) {
           setThreadsData(response.data.data);
         } else {
@@ -54,28 +110,13 @@ const Threads = () => {
 
   const handleThreadClick = (thread) => {
     setSelectedThread(thread);
-    GetCommentsData(thread)
   };
 
   const handleClosePopup = () => {
     setSelectedThread(null);
   };
 
-  const GetCommentsData = async (thread) => {
-    console.log(thread.ThreadID)
-    try {
-      const responseComments = await axios.get(`http://88.200.63.148:8111/comments/byThread?ThreadId=${thread.ThreadID}`);
-
-      if (responseComments.data.success) {
-        console.log(responseComments)
-        setCommentsData(responseComments.data.data);
-      } else {
-        console.error('Failed to fetch threads:', responseComments.data.error);
-      }
-    } catch (error) {
-      console.error('Error fetching threads:', error);
-    }
-  };
+  
 
   return (
     <div className="threads-page">
@@ -104,7 +145,7 @@ const Threads = () => {
           ))}
         </ul>
         {selectedThread && (
-          <ThreadPopup selectedThread={selectedThread} commentsData={commentsData} onClose={handleClosePopup} />
+          <ThreadPopup selectedThread={selectedThread} onClose={handleClosePopup}/>
         )}
       </div>
     </div>

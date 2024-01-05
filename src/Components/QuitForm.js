@@ -46,7 +46,6 @@ const QuitForm = ({ quitEmail, setUpdate}) => {
       });
 
       if (response.data.success) {
-        console.log('Success!');
         
       } else {
         const errorMessage = response.data.message || 'Invalid reason or addiction';
