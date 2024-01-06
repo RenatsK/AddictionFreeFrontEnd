@@ -11,7 +11,6 @@ const MainPage = ({ user }) => {
   const [quitReason, setQuitReason] = useState(null);
   const [addictionType, setAddictionType] = useState(null);
 
-
   const [email] = useState(localStorage.getItem('userEmail'))
 
   const handleLogout = () => {

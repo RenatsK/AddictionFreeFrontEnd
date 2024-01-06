@@ -84,6 +84,7 @@ const QuitForm = ({ quitEmail, setUpdate}) => {
           Quit Reason:
           <input
             type="text"
+            placeholder="Define your reason"
             value={quitReason}
             onChange={handleReasonChange}
             required

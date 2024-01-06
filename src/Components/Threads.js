@@ -57,12 +57,12 @@ const ThreadPopup = ({ selectedThread, onClose }) => {
           <>
           <h3>Comments:</h3>
           <div className="new-comment-container">
-          <input
+          <textarea
             placeholder="Add a new comment..."
             value={newCommentText}
             onChange={(e) => setNewCommentText(e.target.value)}
           />
-          <button onClick={handleCommentSubmit}>Post Comment</button>
+          <button className="post-comment-button" onClick={handleCommentSubmit}>Post Comment</button>
         </div>
           {commentsData.map((comment) => (
             <div key={comment.CommentID} className="comment-item">
@@ -85,12 +85,16 @@ const Threads = () => {
   const navigate = useNavigate();
   const [threadsData, setThreadsData] = useState([]);
   const [selectedThread, setSelectedThread] = useState(null);
+  const [isAddThreadPopupOpen, setAddThreadPopupOpen] = useState(false);
+  const [newThreadTopic, setNewThreadTopic] = useState('');
+  const [newThreadText, setNewThreadText] = useState('');
+  const userEmail = localStorage.getItem('userEmail');
 
   const handleLogout = () => {
+    fetchData();
     navigate('/');
   };
 
-  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://88.200.63.148:8111/threads/allThreads');
@@ -104,8 +108,8 @@ const Threads = () => {
       }
     };
 
+  useEffect(() => {
     fetchData();
-
   }, []);
 
   const handleThreadClick = (thread) => {
@@ -116,7 +120,34 @@ const Threads = () => {
     setSelectedThread(null);
   };
 
-  
+  const openAddThreadPopup = () => {
+    setAddThreadPopupOpen(true);
+  };
+
+  const closeAddThreadPopup = () => {
+    setAddThreadPopupOpen(false);
+    setNewThreadTopic('');
+    setNewThreadText('');
+  };
+
+  const addThread = async () => {
+    try {
+      const response = await axios.post('http://88.200.63.148:8111/threads/addThread', {
+        Email: userEmail,
+        Topic: newThreadTopic,
+        TopicText: newThreadText,
+      });
+
+      if (response.data.success) {
+        fetchData();
+        closeAddThreadPopup();
+      } else {
+        console.error('Failed to add thread:', response.data.error);
+      }
+    } catch (error) {
+      console.error('Error adding thread:', error);
+    }
+  };
 
   return (
     <div className="threads-page">
@@ -131,6 +162,11 @@ const Threads = () => {
       </nav>
       <div className="threads-content">
         <h1 className="threadsh1">Threads</h1>
+  
+        <button className="add-thread-button" onClick={openAddThreadPopup}>
+          Add New Thread
+        </button>
+  
         <ul className="box">
           {threadsData.map((thread) => (
             <div
@@ -138,16 +174,48 @@ const Threads = () => {
               className="thread-item"
               onClick={() => handleThreadClick(thread)}
             >
-              <strong>Topic:</strong> {thread.Topic}<br />
-              {thread.TopicText}<br />
+              <strong>Topic:</strong> {thread.Topic}
+              <br />
+              {thread.TopicText}
+              <br />
               <hr />
             </div>
           ))}
         </ul>
+  
         {selectedThread && (
-          <ThreadPopup selectedThread={selectedThread} onClose={handleClosePopup}/>
+          <ThreadPopup selectedThread={selectedThread} onClose={handleClosePopup} />
         )}
       </div>
+
+        {isAddThreadPopupOpen && (
+          <div className="popup-overlay">
+            <div className="popup-content">
+              <button className="close-button" onClick={closeAddThreadPopup}>X</button>
+              <h2>Add New Thread</h2>
+              <div className="new-thread-container">
+                <label>Topic:</label>
+                <input
+                  placeholder="Let's talk about..."
+                  type="text"
+                  id="newThreadTopic"
+                  value={newThreadTopic}
+                  onChange={(e) => setNewThreadTopic(e.target.value)}
+                  className="new-thread-input"
+                />
+                <label htmlFor="newThreadText">Text:</label>
+                <textarea
+                  placeholder="Enter some text here..."
+                  id="newThreadText"
+                  value={newThreadText}
+                  onChange={(e) => setNewThreadText(e.target.value)}
+                  className="new-thread-text"
+                ></textarea>
+                <button onClick={addThread} className="new-thread-button">Add Thread</button>
+              </div>
+            </div>
+          </div>
+        )}
     </div>
   );
 };

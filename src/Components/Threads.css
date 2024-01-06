@@ -1,184 +1,195 @@
-.threads-page {
-    display: flex;
-    height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .threads-nav-bar {
-    background-color: #607274;
-    padding: 10px;
-    display: flex;
-    padding-top: 10px;
-    flex-direction: column;
-    justify-content: space-between;
-    border: none;
-    border-radius: 3px;
-  }
-  
-  .threads-nav-bar a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    font-size: 16px;
-    display: block;
-    margin-bottom: 25px;
-  }
+.threads-content {
+  margin-left: 100px;
+}
 
-  .threads-nav-bar a:hover {
-    color: #FAEED1;
-  }
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
 
-  .threads-nav-bar a:hover, 
-  .threads-nav-bar .logout-button:hover {
-  transform: scale(1.09);
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  width: 90%;
+  height: auto;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.popup-content h2 {
+  margin-top: 0;
+}
+
+.close-button {
+  padding: 12px 12px;
+  font-size: 12px;
+  background-color: #607274;
+  border: none;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border-radius: 3px;
+}
+
+.close-button:hover {
+  cursor: pointer;
+  transform: scale(1.08);
+}
+
+.comments-container,
+.new-comment-container,
+.new-thread-container {
+  margin-top: 15px;
+}
+
+.comment-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.add-thread-button, .close-button,
+.new-thread-button, .post-comment-button {
+  background-color: #607274;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  transform: scale(1.08);
   cursor: pointer;
 }
-  
-  .logout-button {
-    margin-top: auto;
-    font-size: 14px;
-    padding: 12px;
-    border: none;
-    border-radius: 3px;
-  }
 
-  .threads-content {
-    flex: 1;
-    margin-left: 20px;
-  }
-  
-  .logout-button:hover {
-    background-color: #91404f;
-    margin-top: auto;
-    font-size: 14px;
-    padding: 12px;
-    border: none;
-    border-radius: 3px;
-  }
+.new-comment-container textarea {
+  height: 15vh;
+  max-height: 20vh;
+}
 
-  .box{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
+.threads-page {
+  display: flex;
+  height: 100vh;
+  box-sizing: border-box;
+}
 
-  .threads-content {
-    flex: 1;
-    margin-left: 10px;
-  }
-  
-  .thread-item {
-    border: 3px solid #607274;
-    border-radius: 3px;
-    padding: 10px;
-    margin-bottom: 20px;
-  }
+.threads-nav-bar {
+  background-color: #607274;
+  padding: 10px;
+  display: flex;
+  padding-top: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+  border: none;
+  border-radius: 3px;
+  height: 95vh;
+  position: fixed;
+}
 
-  .thread-item:hover {
-    cursor: pointer;
-    transform: scale(1.02);
-  }
+.threads-nav-bar a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 25px;
+}
 
-  .threadsh1 {
-    font-size: 48px;
-    text-align: center;
-  }
+.threads-nav-bar a:hover {
+  color: #faeed1;
+}
 
-  .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
+.logout-button {
+  margin-top: auto;
+  font-size: 14px;
+  padding: 12px;
+  border: none;
+  border-radius: 3px;
+}
 
-  .popup-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1001;
-    width: 90%;
-    height: auto;
-    position: relative;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-  
-  .popup-content h2 {
-    margin-top: 0;
-  }
-  
-  .close-button {
-    padding: 12px 12px;
-    font-size: 12px;
-    background-color: #607274;
-    border: none;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    border-radius: 3px;
-  }
-  
-  .close-button:hover {
-    cursor: pointer;
-    transform: scale(1.08);
-  }
+.logout-button:hover {
+  background-color: #91404f;
+  margin-top: auto;
+  font-size: 14px;
+  padding: 12px;
+  border: none;
+  border-radius: 3px;
+}
 
-  .comments-container {
-    margin-top: 10px;
-  }
-  
-  .comment-item {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 8px;
-    border-radius: 5px;
-  }
-  
-  .user-info {
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
 
-  .comment-text {
-    margin-bottom: 5px;
-  }
+.thread-item {
+  width: 95%;
+  border: 3px solid #607274;
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
 
-  .comment-p {
-    margin: 0px 0px;
-  }
+.thread-item:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
 
-  .new-comment-container {
-    margin-top: 15px;
-  }
-  
-  .new-comment-container input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  
-  .new-comment-container button {
-    background-color: #607274;
-    border: none;
-    border-radius: 3px;
-    padding: 10px 15px;
-    cursor: pointer;
-    margin-bottom: 20px;
-  }
-  
-  .new-comment-container button:hover {
-    transform: scale(1.08);
-    cursor: pointer;
-  }
+.threadsh1 {
+  font-size: 48px;
+  text-align: center;
+}
+
+.new-thread-container {
+  height: 80vh;
+}
+
+.new-thread-container textarea {
+  max-height: 80vh;
+  height: 60vh;
+  resize: none;
+}
+
+.add-thread-button {
+  background-color: #607274;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-left: 60px;
+}
+
+.add-thread-button:hover {
+  transform: scale(1.08);
+  cursor: pointer;
+}
+
+.new-thread-container {
+  height: 80vh;
+}
