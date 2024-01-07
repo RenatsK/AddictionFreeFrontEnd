@@ -19,10 +19,10 @@
     flex-direction: column;
   }
   
-  input {
+  .input-lr {
     width: 92%;
     padding: 12px; 
-    margin-top: 4px; 
+    margin-bottom: 10px; 
     font-size: 14px; 
   }
   

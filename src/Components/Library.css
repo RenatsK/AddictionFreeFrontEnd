@@ -1,0 +1,52 @@
+.library-page {
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  .library-content {
+    margin-left: 100px;
+  }
+
+  .libraryh1 {
+    font-size: 48px;
+    text-align: center;
+  }
+  
+  .box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .library-item {
+    width: 190vh;
+    border: 3px solid #607274;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .library-item:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+  }
+  
+  .formatted-text {
+    text-align: justify;
+    line-height: 1.5;
+  }
+  
+  .library-item hr {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    margin: 15px 0;
+  }
+
+  .searchbar-library {
+    width: 140vh;
+    border: 3px solid #607274;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 30px; 
+  }

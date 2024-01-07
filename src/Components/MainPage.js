@@ -47,7 +47,7 @@ const MainPage = ({ user }) => {
         <button className="logout-button" onClick={() => handleLogout()}>Log Out</button>
       </nav>
       <div className="content">
-      <h1 className='welcome'>Welcome, {userData}!</h1>
+      <h1 className='welcome'>Nice to see you, {userData}!</h1>
       <p className='reason'>Remember why you quit {addictionType}: {quitReason}</p>
       <div className='box'>
         <QuitForm quitEmail={email} />

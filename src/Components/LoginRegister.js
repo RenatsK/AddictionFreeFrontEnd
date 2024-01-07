@@ -56,6 +56,7 @@ const LoginForm = ({ onLogin }) => {
                 id="emailInput"
                 type="text"
                 value={email}
+                className="input-lr"
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
@@ -67,6 +68,7 @@ const LoginForm = ({ onLogin }) => {
                 id="passwordInput"
                 type="password"
                 value={password}
+                className="input-lr"
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
@@ -105,10 +107,10 @@ const RegisterForm = () => {
     <div className="form-container">
       <h2>Register</h2>
     <form onSubmit={(e) => handleRegister(e)}>
-      <label>Name: <input type="text" value={name} onChange={(e) => setName(e.target.value)} /></label>
-      <label>Surname: <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} /></label>
-      <label>Email: <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /></label>
-      <label>Password: <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /></label>
+      <label>Name: <input type="text" value={name} className="input-lr" onChange={(e) => setName(e.target.value)} /></label>
+      <label>Surname: <input type="text" value={surname} className="input-lr" onChange={(e) => setSurname(e.target.value)} /></label>
+      <label>Email: <input type="email" value={email} className="input-lr" onChange={(e) => setEmail(e.target.value)} /></label>
+      <label>Password: <input type="password" value={password} className="input-lr" onChange={(e) => setPassword(e.target.value)} /></label>
       <button className="btnRegLog" type="submit">Register</button>
     </form>      
     </div>

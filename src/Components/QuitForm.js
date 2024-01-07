@@ -46,7 +46,7 @@ const QuitForm = ({ quitEmail, setUpdate}) => {
       });
 
       if (response.data.success) {
-        
+        window.location.reload();
       } else {
         const errorMessage = response.data.message || 'Invalid reason or addiction';
         setError(errorMessage);
@@ -54,8 +54,6 @@ const QuitForm = ({ quitEmail, setUpdate}) => {
     } catch (error) {
       console.error('Error submitting form: ', error);
     }
-
-    window.location.reload();
   };
 
   const handleReasonChange = (e) => {
@@ -69,10 +67,11 @@ const QuitForm = ({ quitEmail, setUpdate}) => {
         <label>
           Addiction: 
           <select
+            required
             value={selectedAddiction}
             onChange={(e) => setSelectedAddiction(e.target.value)}
           >
-            <option value="">Select Addiction</option>
+            <option value="" required>Select Addiction</option>
             {addictionList.map((addiction) => (
               <option key={addiction.AddictionID} value={addiction.AddictionID}>
                 {addiction.Type}
@@ -85,6 +84,7 @@ const QuitForm = ({ quitEmail, setUpdate}) => {
           <input
             type="text"
             placeholder="Define your reason"
+            className="quit-form-input"
             value={quitReason}
             onChange={handleReasonChange}
             required

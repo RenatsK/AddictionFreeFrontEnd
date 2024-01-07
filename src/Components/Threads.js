@@ -49,7 +49,7 @@ const ThreadPopup = ({ selectedThread, onClose }) => {
       <div className="popup-content">
         <button className="close-button" onClick={onClose}>X</button>
         <h2>{selectedThread.Topic}</h2>
-        <p>
+        <p className="formatted-text">
           {selectedThread.TopicText}
         </p>
         <div className="comments-container">
@@ -60,6 +60,7 @@ const ThreadPopup = ({ selectedThread, onClose }) => {
           <textarea
             placeholder="Add a new comment..."
             value={newCommentText}
+            className="thread-textarea"
             onChange={(e) => setNewCommentText(e.target.value)}
           />
           <button className="post-comment-button" onClick={handleCommentSubmit}>Post Comment</button>
@@ -149,9 +150,15 @@ const Threads = () => {
     }
   };
 
+  function truncateText(text, maxLength) {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+  }
+
   return (
     <div className="threads-page">
-      <nav className="threads-nav-bar">
+      <nav className="nav-bar">
         <a href="/main">HOME</a>
         <a href="/threads">THREADS</a>
         <a href="/chat">CHAT</a>
@@ -162,7 +169,6 @@ const Threads = () => {
       </nav>
       <div className="threads-content">
         <h1 className="threadsh1">Threads</h1>
-  
         <button className="add-thread-button" onClick={openAddThreadPopup}>
           Add New Thread
         </button>
@@ -176,8 +182,9 @@ const Threads = () => {
             >
               <strong>Topic:</strong> {thread.Topic}
               <br />
-              {thread.TopicText}
-              <br />
+              <p className="formatted-text">
+                {truncateText(thread.TopicText, 1000)}
+              </p>
               <hr />
             </div>
           ))}
@@ -209,7 +216,7 @@ const Threads = () => {
                   id="newThreadText"
                   value={newThreadText}
                   onChange={(e) => setNewThreadText(e.target.value)}
-                  className="new-thread-text"
+                  className="thread-textarea"
                 ></textarea>
                 <button onClick={addThread} className="new-thread-button">Add Thread</button>
               </div>
