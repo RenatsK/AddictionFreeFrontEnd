@@ -59,7 +59,7 @@ const Stopwatch = ({ timerEmail }) => {
       });
 
       if (response.data.success) {
-        console.log('Data posted')
+
       } else {
         console.error('Error in post request:', response.data.message);
       }
@@ -72,7 +72,7 @@ const Stopwatch = ({ timerEmail }) => {
     <div className="stopwatch">
       <label className="stopwatch-label">You are addiction free for:</label>
       <div className="stopwatch-display">
-        <p>{elapsedTime}</p>
+        <p>{elapsedTime !== null ? elapsedTime : '00:00:00'}</p>
       </div>
       <button className="failedButton" onClick={handlePostRequest}> I failed </button>
     </div>

@@ -15,6 +15,7 @@ const MainPage = ({ user }) => {
 
   const handleLogout = () => {
     navigate('/');
+    localStorage.clear()
   };
 
   useEffect(() => {
@@ -25,7 +26,6 @@ const MainPage = ({ user }) => {
             email: email,
           },
         });
-        setUserData(response.data.data[0].Name);
         setQuitReason(response.data.data[0].Reason);
         setAddictionType(response.data.data[0].type)
 
@@ -35,8 +35,23 @@ const MainPage = ({ user }) => {
     };
 
     fetchUserData();
+    fetchUserNameData();
   }, [quitReason, email]);
   
+  const fetchUserNameData = async () => {
+    try {
+      const response = await axios.get('http://88.200.63.148:8111/user/userNameByEmail', {
+        params: {
+          email: email,
+        },
+      });
+      setUserData(response.data.data[0].Name);
+
+    } catch (err) {
+      console.error('Error fetching user data:', err);
+    }
+  };
+
   return (
     <div className="main-page">
       <nav className="nav-bar">

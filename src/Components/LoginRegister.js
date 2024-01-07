@@ -8,7 +8,7 @@ const LoginForm = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [ emailGlobal, setEmailGlobal ] = useState('');
+  const [emailGlobal, setEmailGlobal] = useState('');
   
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -16,15 +16,15 @@ const LoginForm = ({ onLogin }) => {
     try {
       const response = await axios.post('http://88.200.63.148:8111/login', {
         email,
-        password,
+        password
       });
 
-      if (response.data.success) {
-        
-        onLogin(); // Trigger the login action (redirect to MainPage or set user state)
+      if (response.data.user) {
+        console.log(response.data)
+        onLogin();
         navigate('/main');
       } else {
-        const errorMessage = response.data.message || 'Invalid email or password';
+        const errorMessage = 'Invalid email or password';
         setError(errorMessage);
 
         document.getElementById('emailInput').style.borderColor = 'red';
@@ -75,6 +75,7 @@ const LoginForm = ({ onLogin }) => {
             </label>
             <br />
             <button className="btnRegLog" type="submit">Login</button>
+            {error && <p className="error-message">{error}</p>}
           </form>
         </div>
       </div>
@@ -86,18 +87,26 @@ const RegisterForm = () => {
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://88.200.63.148:8111/register', {
-        name,
-        surname,
+      const checkEmailResponse = await axios.post('http://88.200.63.148:8111/register/check-email', {
         email,
-        password,
       });
-
+      if (checkEmailResponse.data.exists) {
+        setError('User with this email already exists');
+        document.getElementById('emailInputReg').style.borderColor = 'red';
+      } else {
+        const response = await axios.post('http://88.200.63.148:8111/register', {
+          name,
+          surname,
+          email,
+          password,
+        }); 
+      }
     } catch (error) {
       console.error('Error during registration:', error);
     }
@@ -109,9 +118,10 @@ const RegisterForm = () => {
     <form onSubmit={(e) => handleRegister(e)}>
       <label>Name: <input type="text" value={name} className="input-lr" onChange={(e) => setName(e.target.value)} /></label>
       <label>Surname: <input type="text" value={surname} className="input-lr" onChange={(e) => setSurname(e.target.value)} /></label>
-      <label>Email: <input type="email" value={email} className="input-lr" onChange={(e) => setEmail(e.target.value)} /></label>
+      <label>Email: <input id='emailInputReg' type="email" value={email} className="input-lr" onChange={(e) => setEmail(e.target.value)} /></label>
       <label>Password: <input type="password" value={password} className="input-lr" onChange={(e) => setPassword(e.target.value)} /></label>
       <button className="btnRegLog" type="submit">Register</button>
+      {error && <p className="error-message">{error}</p>}
     </form>      
     </div>
   );
