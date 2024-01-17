@@ -5,6 +5,7 @@ import LoginRegister from './Components/LoginRegister.js';
 import MainPage from './Components/MainPage.js';
 import Threads from './Components/Threads.js';
 import Library from './Components/Library.js';
+import Chat from './Components/Chat.js';
 import axios from 'axios';
 import AppUrl from './Utils/config.js';
 
@@ -45,6 +46,7 @@ function App() {
             <Route path="/main" element={<MainPage user={user} />} />
             <Route path="/threads" element={<Threads user={user} />} />
             <Route path="/library" element={<Library user={user} />} />
+            <Route path="/chat" element={<Chat user={user} />} />
           </Routes>
         </header>
       )}

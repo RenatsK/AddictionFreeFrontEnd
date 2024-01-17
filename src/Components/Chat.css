@@ -1,0 +1,25 @@
+.chat {
+    display: flex;
+    height: 95vh;
+  }
+
+  .ChatContentContainer {
+    display: flex;
+    flex: 1;
+    margin-left: 10%;
+  }
+  
+  .ChatContentLeft,
+  .ChatContentRight {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .ChatContentRight {
+    margin-left: 30%;
+  }
+  .ChatContentDivider {
+    width: 1px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000, rgba(0, 0, 0, 0));
+    height: 95vh;
+  }
