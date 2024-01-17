@@ -63,7 +63,6 @@ const Library = () => {
     const searchText = library.Topic.toLowerCase();
     return searchText.includes(searchTerm.toLowerCase());
   }) || [];
-  
 
   return (
     <div className="library-page">
@@ -78,8 +77,7 @@ const Library = () => {
       </nav>
       <div className="library-content">
         <h1 className="libraryh1">Library</h1>
-        {filteredLibraryData.length > 0 ? (
-          <ul className="box">
+        <div className='box'>
           <input
             type="text"
             placeholder="Search by topic..."
@@ -87,6 +85,9 @@ const Library = () => {
             className="searchbar-library"
             onChange={handleSearch}
           />
+        </div>
+        {filteredLibraryData.length > 0 ? (
+          <ul className="box">
             {filteredLibraryData.map((library) => (
               <div
                 key={library.LibPostID}
@@ -95,15 +96,17 @@ const Library = () => {
               >
                 <strong>Topic:</strong> {library.Topic}
                 <br />
-                <div className="formatted-text">
+                <div className="formatted-text" >
                   <p>{truncateText(library.Text, 1000)}</p>
                 </div>
                 <hr />
               </div>
             ))}
+            
           </ul>
         ) : (
-          <p>No results found.</p>
+          <div className="library-item-nf">
+        </div>
         )}
       </div>
       {selectedLibraryItem && (

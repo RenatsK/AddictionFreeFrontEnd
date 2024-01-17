@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { parsePath, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Threads.css';
 import AppUrl from '../Utils/config';
@@ -176,7 +176,6 @@ const Threads = () => {
         <button className="add-thread-button" onClick={openAddThreadPopup}>
           Add New Thread
         </button>
-  
         <ul className="box">
           {threadsData.map((thread) => (
             <div

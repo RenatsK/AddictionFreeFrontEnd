@@ -21,7 +21,6 @@ const LoginForm = ({ onLogin }) => {
       });
 
       if (response.data.user) {
-        console.log(response.data)
         onLogin();
         navigate('/main');
         setEmailGlobal(email)

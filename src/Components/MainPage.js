@@ -68,7 +68,7 @@ const MainPage = ({ user }) => {
       <div className='box'>
         <QuitForm quitEmail={email} />
         <Stopwatch timerEmail={email}/>
-      </div>    
+      </div>
       </div>
     </div>
   );

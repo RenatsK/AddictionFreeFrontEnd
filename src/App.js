@@ -26,7 +26,6 @@ function App() {
 
       if (response.data.success) {
         setUser(response.data.user);
-        console.log(userEmail)
       } else {
         console.error('Login failed:', response.data.message);
       }

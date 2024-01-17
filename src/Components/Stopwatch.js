@@ -58,12 +58,7 @@ const Stopwatch = ({ timerEmail }) => {
         email: timerEmail,
         currentDateTime: currentDateTime,
       });
-
-      if (response.data.success) {
-
-      } else {
-        console.error('Error in post request:', response.data.message);
-      }
+      
     } catch (error) {
       console.error('Error in post request:', error);
     }
