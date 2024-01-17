@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './LoginRegister.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AppUrl from '../Utils/config';
   
 const LoginForm = ({ onLogin }) => {
@@ -24,6 +24,8 @@ const LoginForm = ({ onLogin }) => {
         console.log(response.data)
         onLogin();
         navigate('/main');
+        setEmailGlobal(email)
+        localStorage.setItem('userEmail', email);
       } else {
         const errorMessage = 'Invalid email or password';
         setError(errorMessage);
@@ -40,11 +42,6 @@ const LoginForm = ({ onLogin }) => {
   };
 
     onLogin();
-
-    useEffect(()=>{
-      setEmailGlobal(email)
-      localStorage.setItem('userEmail', email);
-    }, [email])
 
     return (
       <div>
@@ -75,7 +72,7 @@ const LoginForm = ({ onLogin }) => {
               />
             </label>
             <br />
-            <Link to={'/main'}><button className="btnRegLog" type="submit">Login</button></Link>
+            <button className="btnRegLog" type="submit">Login</button>
             {error && <p className="error-message">{error}</p>}
           </form>
         </div>
