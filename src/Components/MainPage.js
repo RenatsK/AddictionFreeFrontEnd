@@ -4,6 +4,7 @@ import './MainPage.css';
 import QuitForm from './QuitForm';
 import Stopwatch from './Stopwatch';
 import axios from 'axios';
+import AppUrl from '../Utils/config';
 
 const MainPage = ({ user }) => {
   const navigate = useNavigate();
@@ -15,13 +16,13 @@ const MainPage = ({ user }) => {
 
   const handleLogout = () => {
     navigate('/');
-    localStorage.clear()
+    localStorage.removeItem('userEmail');
   };
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('http://88.200.63.148:8111/user/userByEmail', {
+        const response = await axios.get(`${AppUrl.AppUrl}/user/userByEmail`, {
           params: {
             email: email,
           },
@@ -40,7 +41,7 @@ const MainPage = ({ user }) => {
   
   const fetchUserNameData = async () => {
     try {
-      const response = await axios.get('http://88.200.63.148:8111/user/userNameByEmail', {
+      const response = await axios.get(`${AppUrl.AppUrl}/user/userNameByEmail`, {
         params: {
           email: email,
         },
@@ -59,7 +60,7 @@ const MainPage = ({ user }) => {
         <a href="/threads">THREADS</a>
         <a href="/chat">CHAT</a>
         <a href="/library">LIBRARY</a>
-        <button className="logout-button" onClick={() => handleLogout()}>Log Out</button>
+        <button className="logout-button" onClick={() => handleLogout() }>Log Out</button>
       </nav>
       <div className="content">
       <h1 className='welcome'>Nice to see you, {userData}!</h1>

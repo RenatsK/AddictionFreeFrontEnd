@@ -11,6 +11,7 @@
     padding: 20px;
     box-sizing: border-box;
     margin-top: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   }
   
   .stopwatch-label {

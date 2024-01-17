@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { parsePath, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Threads.css';
+import AppUrl from '../Utils/config';
 
 const ThreadPopup = ({ selectedThread, onClose }) => {
   const [newCommentText, setNewCommentText] = useState('');
@@ -14,7 +15,7 @@ const ThreadPopup = ({ selectedThread, onClose }) => {
 
   const GetCommentsData = async () => {
     try {
-      const responseComments = await axios.get(`http://88.200.63.148:8111/comments/byThread/${selectedThread.ThreadID}`);
+      const responseComments = await axios.get(`${AppUrl.AppUrl}/comments/byThread/${selectedThread.ThreadID}`);
 
       if (responseComments.data.success) {
         setCommentsData(responseComments.data.data);
@@ -28,7 +29,7 @@ const ThreadPopup = ({ selectedThread, onClose }) => {
 
   const handleCommentSubmit = async () => {
     try {
-      const response = await axios.post('http://88.200.63.148:8111/comments/addComment', {
+      const response = await axios.post(`${AppUrl.AppUrl}/comments/addComment`, {
         Email: userEmail,
         ThreadID: selectedThread.ThreadID,
         Text: newCommentText
@@ -92,13 +93,13 @@ const Threads = () => {
   const userEmail = localStorage.getItem('userEmail');
 
   const handleLogout = () => {
-    fetchData();
     navigate('/');
+    localStorage.removeItem('userEmail');
   };
 
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://88.200.63.148:8111/threads/allThreads');
+        const response = await axios.get(`${AppUrl.AppUrl}/threads/allThreads`);
         if (response.data.success) {
           setThreadsData(response.data.data);
         } else {
@@ -133,7 +134,7 @@ const Threads = () => {
 
   const addThread = async () => {
     try {
-      const response = await axios.post('http://88.200.63.148:8111/threads/addThread', {
+      const response = await axios.post(`${AppUrl.AppUrl}/threads/addThread`, {
         Email: userEmail,
         Topic: newThreadTopic,
         TopicText: newThreadText,

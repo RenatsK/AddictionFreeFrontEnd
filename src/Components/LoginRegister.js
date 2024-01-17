@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './LoginRegister.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import AppUrl from '../Utils/config';
   
 const LoginForm = ({ onLogin }) => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const LoginForm = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://88.200.63.148:8111/login', {
+      const response = await axios.post(`${AppUrl.AppUrl}/login`, {
         email,
         password
       });
@@ -74,7 +75,7 @@ const LoginForm = ({ onLogin }) => {
               />
             </label>
             <br />
-            <button className="btnRegLog" type="submit">Login</button>
+            <Link to={'/main'}><button className="btnRegLog" type="submit">Login</button></Link>
             {error && <p className="error-message">{error}</p>}
           </form>
         </div>
@@ -93,14 +94,14 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const checkEmailResponse = await axios.post('http://88.200.63.148:8111/register/check-email', {
+      const checkEmailResponse = await axios.post(`${AppUrl.AppUrl}/register/check-email`, {
         email,
       });
       if (checkEmailResponse.data.exists) {
         setError('User with this email already exists');
         document.getElementById('emailInputReg').style.borderColor = 'red';
       } else {
-        const response = await axios.post('http://88.200.63.148:8111/register', {
+        const response = await axios.post(`${AppUrl.AppUrl}/register`, {
           name,
           surname,
           email,
@@ -116,10 +117,10 @@ const RegisterForm = () => {
     <div className="form-container">
       <h2>Register</h2>
     <form onSubmit={(e) => handleRegister(e)}>
-      <label>Name: <input type="text" value={name} className="input-lr" onChange={(e) => setName(e.target.value)} /></label>
-      <label>Surname: <input type="text" value={surname} className="input-lr" onChange={(e) => setSurname(e.target.value)} /></label>
-      <label>Email: <input id='emailInputReg' type="email" value={email} className="input-lr" onChange={(e) => setEmail(e.target.value)} /></label>
-      <label>Password: <input type="password" value={password} className="input-lr" onChange={(e) => setPassword(e.target.value)} /></label>
+      <label>Name: <input type="text" required value={name} className="input-lr" onChange={(e) => setName(e.target.value)} /></label>
+      <label>Surname: <input type="text" required value={surname} className="input-lr" onChange={(e) => setSurname(e.target.value)} /></label>
+      <label>Email: <input id='emailInputReg' required type="email" value={email} className="input-lr" onChange={(e) => setEmail(e.target.value)} /></label>
+      <label>Password: <input type="password" required value={password} className="input-lr" onChange={(e) => setPassword(e.target.value)} /></label>
       <button className="btnRegLog" type="submit">Register</button>
       {error && <p className="error-message">{error}</p>}
     </form>      

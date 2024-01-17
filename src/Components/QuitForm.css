@@ -7,6 +7,7 @@
     width: 300px;
     background-color: #F5F5F5;
     border: 2px solid #607274;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     padding: 20px;
     box-sizing: border-box;

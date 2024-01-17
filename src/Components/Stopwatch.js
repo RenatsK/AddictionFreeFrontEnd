@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Stopwatch.css';
+import AppUrl from '../Utils/config';
 
 const Stopwatch = ({ timerEmail }) => {
   const [startDate, setStartDate] = useState(null);
@@ -9,7 +10,7 @@ const Stopwatch = ({ timerEmail }) => {
   useEffect(() => {
     const fetchStartDate = async () => {
       try {
-        const response = await axios.get('http://88.200.63.148:8111/user/userByEmail', {
+        const response = await axios.get(`${AppUrl.AppUrl}/user/userByEmail`, {
           params: {
             email: timerEmail,
           },
@@ -53,7 +54,7 @@ const Stopwatch = ({ timerEmail }) => {
     try {
       const currentDateTime = getCurrentDateTime();
 
-      const response = await axios.post('http://88.200.63.148:8111/user/stopwatchUpdate', {
+      const response = await axios.post(`${AppUrl.AppUrl}/user/stopwatchUpdate`, {
         email: timerEmail,
         currentDateTime: currentDateTime,
       });

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { parsePath, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Library.css';
+import AppUrl from '../Utils/config';
 
 const LibraryItemPopup = ({ onClose, selectedItem }) => (
   <div className="popup-overlay">
@@ -23,7 +24,7 @@ const Library = () => {
 
   const fetchLibraryData = async () => {
     try {
-      const response = await axios.get('http://88.200.63.148:8111/library/allLibrary');
+      const response = await axios.get(`${AppUrl.AppUrl}/library/allLibrary`);
       setLibraryData(response.data.data);
     } catch (error) {
       console.error('Error fetching library data:', error);
@@ -32,6 +33,7 @@ const Library = () => {
 
   const handleLogout = () => {
     navigate('/');
+    localStorage.removeItem('userEmail');
   };
 
   const openLibraryItemPopup = (libraryItem) => {

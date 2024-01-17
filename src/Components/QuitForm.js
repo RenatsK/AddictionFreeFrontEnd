@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './QuitForm.css';
 import axios from 'axios';
+import AppUrl from '../Utils/config';
 
 const QuitForm = ({ quitEmail, setUpdate}) => {
   const [selectedAddiction, setSelectedAddiction] = useState('');
@@ -11,7 +12,7 @@ const QuitForm = ({ quitEmail, setUpdate}) => {
   useEffect(() => {
     const fetchAddictions = async () => {
       try {
-        const response = await axios.get('http://88.200.63.148:8111/user/addictionToSelect', {
+        const response = await axios.get(`${AppUrl.AppUrl}/user/addictionToSelect`, {
         });
       
         if (response.data.success) {
@@ -37,7 +38,7 @@ const QuitForm = ({ quitEmail, setUpdate}) => {
     const StartDate = `${formattedDate} ${formattedTime}`;
 
     try {
-      const response = await axios.post('http://88.200.63.148:8111/user/userAddiction', {
+      const response = await axios.post(`${AppUrl.AppUrl}/user/userAddiction`, {
         addictionType: selectedAddiction,
         addictionReason: quitReason,
         email: quitEmail,

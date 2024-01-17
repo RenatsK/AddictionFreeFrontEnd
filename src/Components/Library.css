@@ -21,6 +21,7 @@
   .library-item {
     width: 190vh;
     border: 3px solid #607274;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     border-radius: 3px;
     padding: 10px;
     margin-bottom: 20px;
