@@ -29,6 +29,10 @@ const ThreadPopup = ({ selectedThread, onClose }) => {
 
   const handleCommentSubmit = async () => {
     try {
+      if (!newCommentText.trim()) {
+        return;
+      }
+
       const response = await axios.post(`${AppUrl.AppUrl}/comments/addComment`, {
         Email: userEmail,
         ThreadID: selectedThread.ThreadID,
@@ -134,6 +138,10 @@ const Threads = () => {
 
   const addThread = async () => {
     try {
+      if (!newThreadTopic.trim() || !newThreadText.trim()) {
+        return;
+      }
+
       const response = await axios.post(`${AppUrl.AppUrl}/threads/addThread`, {
         Email: userEmail,
         Topic: newThreadTopic,
