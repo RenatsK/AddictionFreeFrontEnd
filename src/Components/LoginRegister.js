@@ -4,7 +4,7 @@ import './LoginRegister.css';
 import { useNavigate } from 'react-router-dom';
 import AppUrl from '../Utils/config';
   
-const LoginForm = ({ onLogin }) => {
+const LoginForm = ({ onLogin, registrationSuccess }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -71,15 +71,18 @@ const LoginForm = ({ onLogin }) => {
               />
             </label>
             <br />
-            <button className="btnRegLog" type="submit">Login</button>
             {error && <p className="error-message">{error}</p>}
+          <button className="btnRegLog" type="submit">Login</button>
+          {registrationSuccess && (
+            <p className="success-message">Registration successful! Please log in.</p>
+          )}
           </form>
         </div>
       </div>
     );
   };
 
-const RegisterForm = () => {
+const RegisterForm = ({ setShowLogin, setRegistrationSuccess }) => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
@@ -102,7 +105,9 @@ const RegisterForm = () => {
           surname,
           email,
           password,
-        }); 
+        });
+        setRegistrationSuccess(true);
+        setShowLogin(true);
       }
     } catch (error) {
       console.error('Error during registration:', error);
@@ -125,18 +130,20 @@ const RegisterForm = () => {
 };
 
 function LoginPage({ onLogin }) {
-  const [showlogin, setShowlogin] = useState(true)
+  const [showlogin, setShowlogin] = useState(true);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+
   return (
     <div className="login-container">
       {showlogin === true &&
       <>
-      <LoginForm onLogin={onLogin} />
+      <LoginForm onLogin={onLogin} setShowLogin={setShowlogin} registrationSuccess={registrationSuccess} />
       <button className="btnRegLog" onClick={()=>setShowlogin(false)}>No account? Register!</button>
       </>}
 
       {showlogin === false &&
       <>
-      <RegisterForm />
+      <RegisterForm setShowLogin={setShowlogin} setRegistrationSuccess={setRegistrationSuccess} />
       <button className="btnRegLog" onClick={()=>setShowlogin(true)}>Alredy registered? Login!</button>
       </>}
     </div>

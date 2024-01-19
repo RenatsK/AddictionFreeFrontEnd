@@ -42,6 +42,6 @@
     background-color: #DED0B6;
   }
   
-  .error-message {
+  .error-message, .success-message {
     text-align: center;
   }
