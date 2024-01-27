@@ -1,5 +1,5 @@
 .threads-content {
-  margin-left: 100px;
+  margin-left: 60px;
 }
 
 .popup-overlay {
@@ -122,7 +122,7 @@ button:hover {
 }
 
 .thread-item {
-  width: 190vh;
+  width: 90%;
   border: 3px solid #607274;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
@@ -162,7 +162,7 @@ button:hover {
   padding: 10px 15px;
   cursor: pointer;
   margin-bottom: 20px;
-  margin-left: 50px;
+  margin-left: 97px;
 }
 
 .add-thread-button:hover {
